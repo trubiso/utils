@@ -5,6 +5,9 @@ to language learning and task management.
 
 the APIs are in the `api/` folder, the utilities are in the root folder.
 
+in order to use these utilities, a `.env` file must be created with a
+`TODOIST_TOKEN` entry.
+
 ## addw
 
 `addw` adds the specified word(s) in the specified language to the
