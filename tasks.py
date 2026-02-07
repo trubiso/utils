@@ -23,6 +23,7 @@ def ask_tasks(tasks: list[dict], *, separate_dates: bool = False) -> int:
         date = task["date"]
         priority = task["priority"]
         content = task["content"]
+        content = content.replace('`', '\'')
         date_info = ("* " if recurring else "") + date
         if task["overdue"]:
             urgent_rows.append(len(text_tasks))
