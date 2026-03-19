@@ -60,7 +60,20 @@ def get_tasks(filter: str = "today") -> list[dict]:
 
     tasks = []
     today = datetime.strptime(datetime.now().strftime("%Y-%m-%d"), "%Y-%m-%d")
-    for result in send_request("/tasks/filter", get={"query": filter})["results"]:
+
+    results = []
+    old_cursor = None
+    for _ in range(10):
+        new_results = send_request("/tasks/filter", get={"query": filter, "cursor": old_cursor})
+        results.extend(new_results["results"])
+        old_cursor = new_results["next_cursor"]
+        if old_cursor is None:
+            break
+
+    if old_cursor is not None:
+        print("Too many paginations, quitting")
+
+    for result in results:
         id = result["id"]
         project_id = result["project_id"]
         section_id = result["section_id"]
