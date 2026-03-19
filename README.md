@@ -15,7 +15,7 @@ corresponding [Anki][anki] deck.
 
 * to specify the language of the word(s) and corresponding Anki deck, use the
 `-l`/`--lang` parameter with its corresponding name (`cz`, `de` or `ru`; only
-`cz` is implemented as of right now)
+`cz` and `ru` are implemented as of right now)
 
 * to output through [rofi] instead of stdout, use the `-r`/`--rofi` flag.
 
@@ -27,6 +27,7 @@ the currently supported dictionary APIs are the following:
 
 * [FreeDictionaryAPI](https://freedictionaryapi.com/), which gives access to a
 powerful enough subset of Wiktionary, currently used for `cz`.
+* [OpenRussian](https://en.openrussian.org/), the dictionary used for `ru`.
 
 ## tasks
 

@@ -3,6 +3,7 @@ import argparse
 
 import api.anki as anki
 import api.dict.cz as cz
+import api.dict.ru as ru
 import api.rofi as rofi
 
 
@@ -35,7 +36,7 @@ def add_words(lang, words: list[str], use_rofi: bool):
     notes_raw, not_found = lang.list_as_note(
         new_words,
         ask_ambiguity=(
-            ask_ambiguity_rofi if use_rofi else cz.ask_ambiguity_default),
+            ask_ambiguity_rofi if use_rofi else lang.ask_ambiguity_default),
     )
     output = ""
     if len(not_found) > 0:
@@ -91,5 +92,7 @@ use_rofi = args.rofi
 
 if lang == "cz":
     add_words(cz, words, use_rofi)
+elif lang == "ru":
+    add_words(ru, words, use_rofi)
 else:
     print(f"Language {lang} is not supported yet!")
