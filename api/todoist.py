@@ -81,7 +81,8 @@ def get_tasks(filter: str = "today") -> list[dict]:
         section = sections[section_id] if section_id is not None else None
         labels = result["labels"]
         priority = 5 - result["priority"]
-        content = result["content"].replace('"', '\\"')
+        # TODO: escape ` and then somehow remove that escape from the calculated string length
+        content = result["content"].replace('"', '\\"').replace('`', '\'')
         order = result["day_order"]
         if result["due"] is not None:
             date = result["due"]["date"][: len("YYYY-MM-DD")]
