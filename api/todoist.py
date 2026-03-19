@@ -11,8 +11,13 @@ base_url = "https://api.todoist.com/api/v1"
 
 def send_request(url: str, *, get: dict = {}, post: dict | None = None) -> dict:
     url = base_url + url
+    added_first = False
     for key in get:
-        url += f"?{key}={get[key]}"
+        if get[key] is None:
+            continue
+        url += "&" if added_first else "?"
+        added_first = True
+        url += f"{key}={get[key]}"
     headers = {"Authorization": f"Bearer {os.environ["TODOIST_TOKEN"]}"}
     r = (
         requests.post(url, post, headers=headers)
