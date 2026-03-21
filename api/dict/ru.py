@@ -145,6 +145,8 @@ def as_note(
     if query == "-":
         print(" [skipped]")
         return None
+    else:
+        print()
     data = requests.get(f"https://api.openrussian.org/api/words?bare={query}&lang=en")
     json = data.json()
 
@@ -154,10 +156,8 @@ def as_note(
         words.append(make_note(process_word_sense(word)))
 
     if len(words) == 0:
-        print(f" Error: Not found")
+        print("Error: Not found")
         return None
-    else:
-        print()
 
     which_word = None
     if len(words) > 1:
