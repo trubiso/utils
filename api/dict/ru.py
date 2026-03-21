@@ -47,7 +47,7 @@ def process_word_sense(word: dict) -> dict:
         start = 0
         end = 0
         for link in sentence["links"]:
-            if link["word"]["word"] == query:
+            if link["word"]["word"] in [word["bare"], word["accented"]]:
                 start = link["start"]
                 end = link["length"] + start
 
@@ -173,6 +173,8 @@ def as_note(
             return None
         else:
             which_word = words[which_is_which[which]]
+    else:
+        which_word = words[0]
 
     return which_word
 
